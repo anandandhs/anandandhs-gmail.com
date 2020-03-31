@@ -1,4 +1,4 @@
-package com.sample.MvvmApplication.view
+package com.sample.MvvmApplication.view.main
 
 import android.os.Bundle
 import android.util.Log

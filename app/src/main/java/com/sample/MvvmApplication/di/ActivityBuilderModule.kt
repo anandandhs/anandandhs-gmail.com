@@ -1,6 +1,6 @@
 package com.sample.MvvmApplication.di
 
-import com.sample.MvvmApplication.view.MainActivity
+import com.sample.MvvmApplication.view.main.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
