@@ -1,4 +1,4 @@
-package com.sample.MvvmApplication.model
+package com.sample.mvvmapplication.model
 
 data class PostsItem(
     val body: String,

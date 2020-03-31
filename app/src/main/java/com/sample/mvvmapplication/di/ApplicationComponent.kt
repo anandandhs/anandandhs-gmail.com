@@ -1,6 +1,6 @@
-package com.sample.MvvmApplication.di
+package com.sample.mvvmapplication.di
 
-import com.sample.MvvmApplication.SampleApplication
+import com.sample.mvvmapplication.SampleApplication
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -8,7 +8,7 @@ import dagger.android.AndroidInjector
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AndroidInjectionModule::class,ActivityBuilderModule::class,ApplicationModule::class])
+@Component(modules = [AndroidInjectionModule::class,ActivityBuilderModule::class,ApplicationModule::class,ViewModelFactoryModule::class])
 interface ApplicationComponent :AndroidInjector<SampleApplication>{
 
     @Component.Builder

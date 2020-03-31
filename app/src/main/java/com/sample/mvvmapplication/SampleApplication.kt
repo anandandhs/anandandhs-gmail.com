@@ -1,6 +1,6 @@
-package com.sample.MvvmApplication
+package com.sample.mvvmapplication
 
-import com.sample.MvvmApplication.di.DaggerApplicationComponent
+import com.sample.mvvmapplication.di.DaggerApplicationComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 

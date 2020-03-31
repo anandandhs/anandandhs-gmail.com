@@ -1,6 +1,6 @@
-package com.sample.MvvmApplication
+package com.sample.mvvmapplication
 
-import com.sample.MvvmApplication.model.PostsItem
+import com.sample.mvvmapplication.model.PostsItem
 import io.reactivex.Observable
 import retrofit2.http.GET
 

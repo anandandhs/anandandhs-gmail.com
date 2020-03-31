@@ -1,14 +1,16 @@
-package com.sample.MvvmApplication.view.main
+package com.sample.mvvmapplication.view.main
 
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sample.MvvmApplication.PostsAdapter
-import com.sample.MvvmApplication.R
-import com.sample.MvvmApplication.RequestInterface
-import com.sample.MvvmApplication.model.PostsItem
+import com.sample.mvvmapplication.PostsAdapter
+import com.sample.mvvmapplication.R
+import com.sample.mvvmapplication.RequestInterface
+import com.sample.mvvmapplication.model.PostsItem
+import com.sample.mvvmapplication.view.ViewModelProviderFactory
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -22,6 +24,10 @@ class MainActivity : DaggerAppCompatActivity(),PostsAdapter.Listener {
     private var mCompositeDisposable: CompositeDisposable? = null
     private var mAndroidArrayList: ArrayList<PostsItem>? = null
     private var mAdapter: PostsAdapter? = null
+    private lateinit var viewModel:MainViewModel
+
+    @Inject
+    lateinit var providerFactory:ViewModelProviderFactory
 
     @Inject
     lateinit var requestInterface: RequestInterface
@@ -29,6 +35,8 @@ class MainActivity : DaggerAppCompatActivity(),PostsAdapter.Listener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        viewModel = ViewModelProviders.of(this,providerFactory).get(MainViewModel::class.java)
 
         mCompositeDisposable = CompositeDisposable()
 

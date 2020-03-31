@@ -1,11 +1,11 @@
-package com.sample.MvvmApplication
+package com.sample.mvvmapplication
 
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.sample.MvvmApplication.model.PostsItem
+import com.sample.mvvmapplication.model.PostsItem
 import kotlinx.android.synthetic.main.main_recycler_view.view.*
 import kotlin.collections.ArrayList
 

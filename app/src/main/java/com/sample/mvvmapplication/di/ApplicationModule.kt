@@ -1,6 +1,6 @@
-package com.sample.MvvmApplication.di
+package com.sample.mvvmapplication.di
 
-import com.sample.MvvmApplication.RequestInterface
+import com.sample.mvvmapplication.RequestInterface
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
