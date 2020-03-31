@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sample.mvvmapplication.PostsAdapter
 import com.sample.mvvmapplication.R
-import com.sample.mvvmapplication.RequestInterface
+import com.sample.mvvmapplication.network.main.MainApi
 import com.sample.mvvmapplication.model.PostsItem
 import com.sample.mvvmapplication.view.ViewModelProviderFactory
 import dagger.android.support.DaggerAppCompatActivity
@@ -30,7 +30,7 @@ class MainActivity : DaggerAppCompatActivity(),PostsAdapter.Listener {
     lateinit var providerFactory:ViewModelProviderFactory
 
     @Inject
-    lateinit var requestInterface: RequestInterface
+    lateinit var requestInterface: MainApi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

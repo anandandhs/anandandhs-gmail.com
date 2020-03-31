@@ -1,6 +1,6 @@
 package com.sample.mvvmapplication.di
 
-import com.sample.mvvmapplication.RequestInterface
+import com.sample.mvvmapplication.network.main.MainApi
 import com.sample.mvvmapplication.util.Constants
 import dagger.Module
 import dagger.Provides
@@ -14,11 +14,11 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideRetrofitInstance():RequestInterface{
+    fun provideRetrofitInstance(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
-            .build().create(RequestInterface::class.java)
+            .build()
     }
 }
