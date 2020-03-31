@@ -22,15 +22,15 @@ class MainActivity : DaggerAppCompatActivity(),PostsAdapter.Listener {
 
     private val TAG = MainActivity::class.java.simpleName
     private var mCompositeDisposable: CompositeDisposable? = null
-    private var mAndroidArrayList: ArrayList<PostsItem>? = null
+    private var mAndroidArrayList: ArrayList<PostsItem> = ArrayList()
     private var mAdapter: PostsAdapter? = null
     private lateinit var viewModel:MainViewModel
 
     @Inject
     lateinit var providerFactory:ViewModelProviderFactory
 
-    @Inject
-    lateinit var requestInterface: MainApi
+//    @Inject
+//    lateinit var requestInterface: MainApi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,30 +56,30 @@ class MainActivity : DaggerAppCompatActivity(),PostsAdapter.Listener {
     private fun loadJSON() {
 
 
-        mCompositeDisposable?.add(
-            requestInterface.getData()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::handleResponse, this::handleError)
-        )
+//        mAndroidArrayList = viewModel.getJason().value
+//        mAdapter = PostsAdapter(mAndroidArrayList, this)
+//        recyclerView.adapter = mAdapter
+//        mCompositeDisposable?.add(
+//
+//        )
 
 
     }
 
-    private fun handleResponse(androidList: List<PostsItem>) {
-
-        mAndroidArrayList = ArrayList(androidList)
-        mAdapter = PostsAdapter(mAndroidArrayList!!, this)
-
-        recyclerView.adapter = mAdapter
-    }
-
-    private fun handleError(error: Throwable) {
-
-        Log.d(TAG, error.localizedMessage)
-
-        Toast.makeText(this, "Error ${error.localizedMessage}", Toast.LENGTH_SHORT).show()
-    }
+//    private fun handleResponse(androidList: List<PostsItem>) {
+//
+//        mAndroidArrayList = ArrayList(androidList)
+//        mAdapter = PostsAdapter(mAndroidArrayList!!, this)
+//
+//        recyclerView.adapter = mAdapter
+//    }
+//
+//    private fun handleError(error: Throwable) {
+//
+//        Log.d(TAG, error.localizedMessage)
+//
+//        Toast.makeText(this, "Error ${error.localizedMessage}", Toast.LENGTH_SHORT).show()
+//    }
 
     override fun onItemClick(android: PostsItem) {
 
@@ -88,7 +88,7 @@ class MainActivity : DaggerAppCompatActivity(),PostsAdapter.Listener {
 
     override fun onDestroy() {
         super.onDestroy()
-        mCompositeDisposable?.clear()
+//        mCompositeDisposable?.clear()
     }
 
 }

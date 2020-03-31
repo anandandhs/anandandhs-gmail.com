@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface MainApi {
     @GET("/posts")
-    fun getData() : Observable<List<PostsItem>>
+    fun getData() : Observable<ArrayList<PostsItem>>
 }
