@@ -1,6 +1,7 @@
 package com.sample.mvvmapplication.di
 
 import com.sample.mvvmapplication.RequestInterface
+import com.sample.mvvmapplication.util.Constants
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -15,7 +16,7 @@ class ApplicationModule {
     @Singleton
     fun provideRetrofitInstance():RequestInterface{
         return Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com/")
+            .baseUrl(Constants.BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build().create(RequestInterface::class.java)

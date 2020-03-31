@@ -3,7 +3,7 @@ package com.sample.mvvmapplication.view.main
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sample.mvvmapplication.PostsAdapter
@@ -36,7 +36,7 @@ class MainActivity : DaggerAppCompatActivity(),PostsAdapter.Listener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel = ViewModelProviders.of(this,providerFactory).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this,providerFactory).get(MainViewModel::class.java)
 
         mCompositeDisposable = CompositeDisposable()
 
