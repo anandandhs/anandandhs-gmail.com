@@ -9,7 +9,7 @@ import com.sample.mvvmapplication.model.PostsItem
 import kotlinx.android.synthetic.main.main_recycler_view.view.*
 import kotlin.collections.ArrayList
 
-class PostsAdapter(private val dataList : ArrayList<PostsItem>, private val listener: Listener) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
+class PostsAdapter(private val dataList : List<PostsItem>, private val listener: Listener) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
     interface Listener {
 

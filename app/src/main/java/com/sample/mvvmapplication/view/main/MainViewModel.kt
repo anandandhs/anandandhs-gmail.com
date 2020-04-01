@@ -2,9 +2,7 @@ package com.sample.mvvmapplication.view.main
 
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.sample.mvvmapplication.PostsAdapter
 import com.sample.mvvmapplication.model.PostsItem
 import com.sample.mvvmapplication.network.main.MainApi
@@ -15,30 +13,24 @@ import javax.inject.Inject
 
 class MainViewModel @Inject constructor(val mainApi: MainApi):ViewModel(){
 
-//    private val postsItemLiveData = MutableLiveData<ArrayList<PostsItem>>()
-//    private val postsItemErrorLiveData = MutableLiveData<Throwable>()
-//    private var requestStatus:Boolean = false
-//    private val TAG = MainViewModel::class.java.simpleName
-//    fun getJason():MutableLiveData<ArrayList<PostsItem>>{
-//        mainApi.getData()
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribeOn(Schedulers.io())
-//            .subscribe(this::handleResponse, this::handleError)
-//
-////        if(requestStatus)
-//            return postsItemLiveData
-////        else
-////            return  postsItemErrorLiveData
-//    }
-//
-//    private fun handleResponse(androidList: ArrayList<PostsItem>) {
-//        postsItemLiveData.value = androidList
-//        requestStatus = true
-//    }
-//
-//    private fun handleError(error: Throwable) {
-//        postsItemErrorLiveData.value = error
-//
-//    }
+    private val postsItemLiveData = MediatorLiveData<List<PostsItem>>()
+    private val TAG = MainViewModel::class.java.simpleName
+
+    fun callPostApi(){
+        Log.d(TAG,"View Model Running")
+        val source = LiveDataReactiveStreams.fromPublisher<List<PostsItem>> {
+            mainApi.getData()
+                .subscribeOn(Schedulers.io())
+        }
+
+        postsItemLiveData.addSource(source, Observer {data->
+            postsItemLiveData.value = data
+            postsItemLiveData.removeSource(source)
+        })
+    }
+
+    fun observePosts():LiveData<List<PostsItem>> = postsItemLiveData
+
+
 
 }
