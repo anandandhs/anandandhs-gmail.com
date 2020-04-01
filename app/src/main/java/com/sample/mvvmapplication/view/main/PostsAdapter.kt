@@ -1,13 +1,13 @@
-package com.sample.mvvmapplication
+package com.sample.mvvmapplication.view.main
 
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.sample.mvvmapplication.R
 import com.sample.mvvmapplication.model.PostsItem
 import kotlinx.android.synthetic.main.main_recycler_view.view.*
-import kotlin.collections.ArrayList
 
 class PostsAdapter(private val dataList : List<PostsItem>, private val listener: Listener) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 

@@ -1,4 +1,4 @@
-package com.sample.mvvmapplication.view.main
+package com.sample.mvvmapplication.di.main
 
 import com.sample.mvvmapplication.network.main.MainApi
 import dagger.Module

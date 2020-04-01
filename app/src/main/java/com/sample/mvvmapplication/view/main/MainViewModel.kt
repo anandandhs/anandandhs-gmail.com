@@ -1,36 +1,53 @@
 package com.sample.mvvmapplication.view.main
 
 import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.*
-import com.sample.mvvmapplication.PostsAdapter
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.sample.mvvmapplication.model.PostsItem
 import com.sample.mvvmapplication.network.main.MainApi
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(val mainApi: MainApi):ViewModel(){
 
-    private val postsItemLiveData = MediatorLiveData<List<PostsItem>>()
+
+class MainViewModel @Inject constructor(private val mainApi: MainApi):ViewModel(){
+
+    private val disposable = CompositeDisposable()
+    private var repos = MutableLiveData<List<PostsItem>>()
+    private var repoLoadError = MutableLiveData<Boolean>()
     private val TAG = MainViewModel::class.java.simpleName
-
-    fun callPostApi(){
+    fun fetchRepo(){
         Log.d(TAG,"View Model Running")
-        val source = LiveDataReactiveStreams.fromPublisher<List<PostsItem>> {
+        disposable.add(
             mainApi.getData()
                 .subscribeOn(Schedulers.io())
-        }
-
-        postsItemLiveData.addSource(source, Observer {data->
-            postsItemLiveData.value = data
-            postsItemLiveData.removeSource(source)
-        })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::handleResponse,this::handleError)
+        )
     }
 
-    fun observePosts():LiveData<List<PostsItem>> = postsItemLiveData
+    private fun handleResponse(response:List<PostsItem>){
+        repoLoadError.value = false
+        repos.value = response.toMutableList()
+    }
 
+    private fun handleError(error:Throwable){
+        repoLoadError.value = false
+    }
 
+    fun getRepos(): LiveData<List<PostsItem>> {
+        return repos
+    }
 
+    fun getError(): LiveData<Boolean> {
+        return repoLoadError
+    }
+
+    override fun onCleared() {
+        disposable.clear()
+    }
 }
+

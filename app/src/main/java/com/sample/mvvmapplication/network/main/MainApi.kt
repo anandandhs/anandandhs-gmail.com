@@ -1,6 +1,7 @@
 package com.sample.mvvmapplication.network.main
 
 import com.sample.mvvmapplication.model.PostsItem
+import io.reactivex.Flowable
 import io.reactivex.Single
 import retrofit2.http.GET
 
