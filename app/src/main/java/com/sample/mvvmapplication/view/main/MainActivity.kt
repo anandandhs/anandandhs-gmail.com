@@ -19,7 +19,7 @@ class MainActivity : DaggerAppCompatActivity(),
 
     private val TAG = MainActivity::class.java.simpleName
 
-    private var mAndroidArrayList: List<PostsItem> = ArrayList()
+  //  private var mAndroidArrayList: ArrayList<PostsItem> = ArrayList()
     private var mAdapter: PostsAdapter? = null
     private lateinit var viewModel:MainViewModel
 
@@ -44,17 +44,18 @@ class MainActivity : DaggerAppCompatActivity(),
         viewModel.getError().observe(this, Observer {isError->
             if(isError==false){
                 viewModel.getRepos().observe(this, Observer { response->
-                    mAndroidArrayList = response.toMutableList()
+                    populateRecyclerView(response)
                 })
             }
         })
-
-        mAdapter = PostsAdapter(mAndroidArrayList,this)
-        recyclerView.adapter = mAdapter
-        Log.d(TAG,mAndroidArrayList.size.toString())
     }
 
     override fun onItemClick(android: PostsItem) {
         Toast.makeText(this, "${android.id} Clicked !", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun populateRecyclerView(response:ArrayList<PostsItem>){
+        mAdapter = PostsAdapter(response,this)
+        recyclerView.adapter = mAdapter
     }
 }

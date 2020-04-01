@@ -7,5 +7,5 @@ import retrofit2.http.GET
 
 interface MainApi {
     @GET("/posts")
-    fun getData() : Single<List<PostsItem>>
+    fun getData() : Single<ArrayList<PostsItem>>
 }

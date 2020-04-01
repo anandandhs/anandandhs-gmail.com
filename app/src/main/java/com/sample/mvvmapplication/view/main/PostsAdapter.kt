@@ -9,7 +9,7 @@ import com.sample.mvvmapplication.R
 import com.sample.mvvmapplication.model.PostsItem
 import kotlinx.android.synthetic.main.main_recycler_view.view.*
 
-class PostsAdapter(private val dataList : List<PostsItem>, private val listener: Listener) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
+class PostsAdapter(private val dataList : ArrayList<PostsItem>, private val listener: Listener) : RecyclerView.Adapter<PostsAdapter.ViewHolder>() {
 
     interface Listener {
 
@@ -37,7 +37,7 @@ class PostsAdapter(private val dataList : List<PostsItem>, private val listener:
         fun bind(android: PostsItem, listener: Listener, colors : Array<String>, position: Int) {
 
             itemView.textView.text = android.id.toString()
-            itemView.textView2.text = android.body
+            itemView.textView2.text = android.userId.toString()
             itemView.textView3.text = android.title
             itemView.setBackgroundColor(Color.parseColor(colors[position % 6]))
 
