@@ -36,9 +36,9 @@ class PostsAdapter(private val dataList : ArrayList<PostsItem>, private val list
 
         fun bind(android: PostsItem, listener: Listener, colors : Array<String>, position: Int) {
 
-            itemView.textView.text = android.id.toString()
-            itemView.textView2.text = android.userId.toString()
-            itemView.textView3.text = android.title
+            itemView.textView2.text = android.title
+            itemView.textView.text = android.userId.toString()
+            itemView.textView3.text = android.id.toString()
             itemView.setBackgroundColor(Color.parseColor(colors[position % 6]))
 
             itemView.setOnClickListener{ listener.onItemClick(android) }
