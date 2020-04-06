@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sample.mvvmapplication.R
 import com.sample.mvvmapplication.model.PostsItem
 import com.sample.mvvmapplication.view.ViewModelProviderFactory
+import com.sample.mvvmapplication.view.main.detail.DetailFragment
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -33,6 +34,7 @@ class MainActivity : DaggerAppCompatActivity(),
         viewModel = ViewModelProvider(this,providerFactory).get(MainViewModel::class.java)
         viewModel.fetchRepo()
         initRecyclerView()
+        inflateDetailFragment()
 
     }
 
@@ -57,5 +59,11 @@ class MainActivity : DaggerAppCompatActivity(),
     private fun populateRecyclerView(response:ArrayList<PostsItem>){
         mAdapter = PostsAdapter(response,this)
         recyclerView.adapter = mAdapter
+    }
+
+    private fun inflateDetailFragment(){
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.mainCointainer,DetailFragment())
+            .commit()
     }
 }
