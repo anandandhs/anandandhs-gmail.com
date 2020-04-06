@@ -3,6 +3,7 @@ package com.sample.mvvmapplication.view.main
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,7 +35,6 @@ class MainActivity : DaggerAppCompatActivity(),
         viewModel = ViewModelProvider(this,providerFactory).get(MainViewModel::class.java)
         viewModel.fetchRepo()
         initRecyclerView()
-        inflateDetailFragment()
 
     }
 
@@ -52,8 +52,12 @@ class MainActivity : DaggerAppCompatActivity(),
         })
     }
 
-    override fun onItemClick(android: PostsItem) {
-        Toast.makeText(this, "${android.id} Clicked !", Toast.LENGTH_SHORT).show()
+    override fun onItemClick(postItem: PostsItem) {
+        val fragBundle = bundleOf("id" to postItem.id)
+        val detailFragment = DetailFragment()
+        detailFragment.arguments = fragBundle
+        inflateDetailFragment(detailFragment)
+        //Toast.makeText(this, "${postItem.id} Clicked !", Toast.LENGTH_SHORT).show()
     }
 
     private fun populateRecyclerView(response:ArrayList<PostsItem>){
@@ -61,9 +65,9 @@ class MainActivity : DaggerAppCompatActivity(),
         recyclerView.adapter = mAdapter
     }
 
-    private fun inflateDetailFragment(){
+    private fun inflateDetailFragment(detailFragment: DetailFragment){
         supportFragmentManager.beginTransaction()
-            .replace(R.id.mainCointainer,DetailFragment())
+            .replace(R.id.mainCointainer,detailFragment)
             .commit()
     }
 }
